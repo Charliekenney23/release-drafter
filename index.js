@@ -141,10 +141,14 @@ module.exports = (app, { getRouter }) => {
       commitish,
     } = getInput()
 
+    console.log({ shouldDraft, configName, version, tag, name })
+
     const config = await getConfig({
       context,
       configName,
     })
+
+    console.log({ config })
 
     const { isPreRelease } = getInput({ config })
 
@@ -170,6 +174,8 @@ module.exports = (app, { getRouter }) => {
       filterByCommitish,
       tagPrefix,
     })
+
+    console.log({ draftRelease, lastRelease, targetCommitish })
 
     const { commits, pullRequests: mergedPullRequests } =
       await findCommitsWithAssociatedPullRequests({
